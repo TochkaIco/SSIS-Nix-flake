@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
@@ -110,8 +110,20 @@
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
 
+  home-manager.extraSpecialArgs = { inherit inputs; };
+
   # Load your separate home.nix file here:
   home-manager.users.tochka = import ./home.nix;
+
+  programs.hyprland.enable = true;
+
+   services.geoclue2.enable = true; # Required for night light / positioning
+
+   fonts.packages = with pkgs; [
+    rubik
+    nerd-fonts.ubuntu
+    nerd-fonts.jetbrains-mono
+  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

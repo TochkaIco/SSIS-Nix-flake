@@ -8,24 +8,25 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    dots-hyprland = {
+          url = "git+https://github.com/end-4/dots-hyprland?submodules=1";
+          flake = false;
+    };
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, home-manager, dots-hyprland, ... }@inputs:
     let
       system = "x86_64-linux";
     in
     {
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         inherit system;
+        specialArgs = { inherit inputs; };
         modules = [
           ./configuration.nix
           home-manager.nixosModules.home-manager
         ];
-      };
-
-      homeConfigurations.tochka = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.${system};
-        modules = [ ./home.nix ];
       };
     };
 }

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   # Basic user information
@@ -7,8 +7,17 @@
 
   home.stateVersion = "26.05";
 
-  # User-only packages
-  home.packages = with pkgs; [];
+  # Install required tools for the dotfiles
+  home.packages = with pkgs; [
+    quickshell
+    kitty
+    dart-sass
+  ];
+
+  # Symlink dotfiles from the flake input directly into ~/.config
+  xdg.configFile."hypr".source = "${inputs.dots-hyprland}/.config/hypr";
+  xdg.configFile."quickshell".source = "${inputs.dots-hyprland}/.config/quickshell";
+  xdg.configFile."ags".source = "${inputs.dots-hyprland}/.config/ags";
 
   # Program configurations
   programs.git = {
