@@ -46,8 +46,15 @@ in
   # Program configurations
   programs.git = {
     enable = true;
+
     settings.user.name = "Fedor Romanov";
     settings.user.email = "fedor1378romanov@gmail.com";
+
+    signing = {
+      key = "~/.ssh/id_ed25519.pub";
+      signByDefault = true;
+      format = "ssh";
+    };
   };
 
   imports = [
