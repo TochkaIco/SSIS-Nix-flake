@@ -148,6 +148,7 @@
      telegram-desktop
      vesktop
      spotify
+     spicetify-cli
      steam
      rnote
 
@@ -155,6 +156,8 @@
      vscode
      jetbrains.phpstorm
      jetbrains.webstorm
+
+     tailscale
 
      laravel
      php85
