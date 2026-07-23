@@ -9,6 +9,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    spicetify-nix = {
+       url = "github:Gerg-L/spicetify-nix";
+       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     caelestia-cli = {
       url = "github:caelestia-dots/cli";
       inputs.nixpkgs.follows = "nixpkgs";

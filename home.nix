@@ -1,5 +1,8 @@
 { config, pkgs, inputs, ... }:
 
+let
+  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+in
 {
   # Basic user information
   home.username = "tochka";
@@ -47,6 +50,28 @@
     settings.user.email = "fedor1378romanov@gmail.com";
   };
 
+  imports = [
+    inputs.spicetify-nix.homeManagerModules.default
+  ];
+
+  # ... your other options (home.packages, pointerCursor, etc.) ...
+
+  programs.spicetify = {
+    enable = true;
+
+    enabledCustomApps = with spicePkgs.apps; [
+      marketplace
+    ];
+
+    enabledExtensions = with spicePkgs.extensions; [
+      adblockify
+      shuffle
+    ];
+
+    theme = spicePkgs.themes.catppuccin;
+    colorScheme = "mocha";
+  };
+ 
   # Vis config
   xdg.configFile."vis/visrc.lua".source = ./visrc.lua;
 }
