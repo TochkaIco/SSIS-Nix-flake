@@ -26,7 +26,18 @@
   # User-only packages
   home.packages = [
     inputs.caelestia-cli.packages.${pkgs.stdenv.hostPlatform.system}.with-shell
-  ];
+    pkgs.fuzzel
+    pkgs.cliphist
+    pkgs.wl-clipboard
+    pkgs.grim
+    pkgs.slurp
+    pkgs.swappy
+    pkgs.gpu-screen-recorder
+    pkgs.hyprpicker
+    pkgs.vscodium
+    pkgs.thunar
+    pkgs.pavucontrol  
+];
 
   # Program configurations
   programs.git = {
