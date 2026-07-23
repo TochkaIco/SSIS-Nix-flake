@@ -16,4 +16,7 @@
     settings.user.name = "Fedor Romanov";
     settings.user.email = "fedor1378romanov@gmail.com";
   };
+
+  # Vis config
+  xdg.configFile."vis/visrc.lua".source = ./visrc.lua;
 }
