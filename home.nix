@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   # Basic user information
@@ -7,8 +7,26 @@
 
   home.stateVersion = "26.05";
 
+  home.sessionVariables = {
+    HYPRCURSOR_THEME = "Bibata-Modern-Classic";
+    HYPRCURSOR_SIZE = "24";
+    XCURSOR_THEME = "Bibata-Modern-Classic";
+    XCURSOR_SIZE = "24";
+  };
+
+  # Keeps your pointer cursor synced automatically
+  home.pointerCursor = {
+    gtk.enable = true;
+    x11.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Classic";
+    size = 24;
+  }; 
+
   # User-only packages
-  home.packages = with pkgs; [];
+  home.packages = [
+    inputs.caelestia-cli.packages.${pkgs.stdenv.hostPlatform.system}.with-shell
+  ];
 
   # Program configurations
   programs.git = {

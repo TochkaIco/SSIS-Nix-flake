@@ -10,6 +10,8 @@
       ./hardware-configuration.nix
     ];
 
+  programs.hyprland.enable = true;
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -113,6 +115,19 @@
   # Load your separate home.nix file here:
   home-manager.users.tochka = import ./home.nix;
 
+  fonts = {
+    enableDefaultPackages = true;
+    packages = with pkgs; [
+      # Modern Nerd Fonts for terminal icons & glyphs
+      nerd-fonts.fira-code
+      nerd-fonts.jetbrains-mono
+    ];
+
+    fontconfig.defaultFonts = {
+      monospace = [ "JetBrainsMono Nerd Font" "FiraCode Nerd Font" ];
+    };
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -126,12 +141,15 @@
      fastfetch
      git
      wget
+     kitty
+     foot
 
      # Regular Apps
      telegram-desktop
      vesktop
      spotify
      steam
+     rnote
 
      # Programming
      laravel
