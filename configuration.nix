@@ -152,6 +152,10 @@
      rnote
 
      # Programming
+     vscode
+     jetbrains.phpstorm
+     jetbrains.webstorm
+
      laravel
      php85
      nodejs_26

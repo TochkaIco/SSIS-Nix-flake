@@ -36,7 +36,8 @@
     pkgs.hyprpicker
     pkgs.vscodium
     pkgs.thunar
-    pkgs.pavucontrol  
+    pkgs.pavucontrol
+    pkgs.todoist  
 ];
 
   # Program configurations
