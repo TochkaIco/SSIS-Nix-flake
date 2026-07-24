@@ -65,6 +65,8 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  services.tailscale.enable = true;
+
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -115,6 +117,30 @@
   # Load your separate home.nix file here:
   home-manager.users.tochka = import ./home.nix;
 
+  programs.fish.enable = true;
+
+  # Aliases
+  environment.shellAliases = {
+    # Bash
+    ll = "ls -l";
+
+    # Git
+    gs = "git status";
+    gl = "git log";
+    gds = "git diff --staged";
+    gaa = "git add .";
+
+    # NixOs
+    rebuild = "git add .; sudo nixos-rebuild switch --flake /home/tochka/nix/.#nixos";
+    updatere = "git add .; sudo nixos-rebuild switch --flake /home/tochka/nix/.#nixos --recreate-lock-file";
+  };
+
+  # Graphics
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+
   fonts = {
     enableDefaultPackages = true;
     packages = with pkgs; [
@@ -149,7 +175,6 @@
      vesktop
      spotify
      spicetify-cli
-     steam
      rnote
 
      # Programming
@@ -164,6 +189,12 @@
      nodejs_26
      python3
   ];
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports for Source Dedicated Server
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
